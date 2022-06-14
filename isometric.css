@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 100% of the viewport height */
+    background: rgb(72, 77, 87);
+    overflow: hidden; /* prevents scrollbars from showing up, even when they're necessary.*/
+}
+.loader   /* class is acessed with . */
+{
+    position: relative;
+    transform: skewY(-15deg) translateX(50px) translateY(50px); 
+    /*y axis are skewed at 15 degree*/
+    /*reposition x 5opx right and y 50 px down*/
+    animation: animatecolor 2.5s linear infinite;
+}
+@keyframes animatecolor
+{
+    0%
+    {
+        filter: hue-rotate(0deg);
+    }
+    100%
+    {
+        filter: hue-rotate(360deg)
+    }
+}
+.loader::before
+{
+    content: '';
+    position: absolute;
+    top: 300px;
+    width: 300px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.1);
+    transform-origin: bottom;
+    /* z-index: 100; */
+    transform: skewX(45deg);
+    filter: blur(20px);
+}
+.loader span
+{
+    position: relative;
+    /*position: relative places an element relative to its current position
+    without changing the layout around it,
+    whereas position: absolute places an element relative 
+    to its parent's position and changing the layout around it.*/
+    width: 200px;
+    height: 40px;
+    display: block;
+    background: rgb(69, 68, 68);
+    transition: 0.5s; /*transiton is delaying the hover effect by 0.5s*/
+    z-index: var(--i);
+    animation: animate 5s ease-in-out infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+@keyframes animate
+{
+    0%
+    {
+        translate: translateX(-70px);
+    }
+    50%
+    {
+        transform: translateX(70px);
+    }
+}
+
+.loader span:hover
+{
+    background: #33a3ee;
+    transition: 0s; /*new effect starts at os*/
+}
+.loader span::before
+{
+    content: '';
+    /*The content CSS property replaces an element with a generated value*/
+    /* used with the ::before and ::after pseudo-elements, to insert generated content. Default value: normal. Inherited: no. Animatable: no. */
+    position: absolute;
+    top: 0;
+    left: -150px;
+    height: 100%;
+    width: 150px;
+    background: #2e3133;
+    transform-origin: right;
+    transform: skewY(45deg);
+    transition: 0.5s;
+}
+.loader span:hover::before
+{
+    background: #1f5378;
+    transition: 0s;
+}
+.loader span::after
+{
+    content: '';
+    position: absolute;
+    top: -150px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: #f00;
+    transform-origin: bottom;
+    transform: skewX(45deg);
+    background: #35383e;
+}
+.loader span:hover::after
+{
+    background: #2982b9;
+    transition: 0s;
+}
